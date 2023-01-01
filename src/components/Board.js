@@ -19,13 +19,13 @@ function Player({playState, gameStats}){
             
             <div className="players">
                   
-                {playState ? <div className="player go">playerOne</div>:<div className="player wait">playerOne</div> }
+                {playState ? <div className="player go">playerX</div>:<div className="player wait">playerX</div> }
                 <div className="playerBoard">
                     {gameStats && <img src={gameStats === 'X'? happy: sad } width="50" height="50" alt="sad or happy face" />}
                     {gameStats && <img src={gameStats !== 'X'? happy: sad} width="50" height="50" alt="sad or happy face"/>}
                     
                 </div>
-                {!playState ? <div className="player go ">playerTwo</div> : <div className="player wait">playerTwo</div>}
+                {!playState ? <div className="player go ">playerO</div> : <div className="player wait">playerO</div>}
             </div>
         </div>
 
