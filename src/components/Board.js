@@ -1,21 +1,30 @@
 import { useState } from "react";
+import happy from '../icons/happy.gif'
+import sad from '../icons/neutral.gif'
 
 
 function Square({value, onSquareClick}){
+    
     return(
-        <div className="btn"
+        <div className="btn "
         onClick={onSquareClick}
         >{value}</div>
     )
 }
 
-function Player({playState}){
+function Player({playState, gameStats}){
     return(
         <div>
-            <div></div>
-            <p>who is next</p>
+            
+            
             <div className="players">
+                  
                 {playState ? <div className="player go">playerOne</div>:<div className="player wait">playerOne</div> }
+                <div className="playerBoard">
+                    {gameStats && <img src={gameStats === 'X'? happy: sad } width="50" height="50" alt="sad or happy face" />}
+                    {gameStats && <img src={gameStats !== 'X'? happy: sad} width="50" height="50" alt="sad or happy face"/>}
+                    
+                </div>
                 {!playState ? <div className="player go ">playerTwo</div> : <div className="player wait">playerTwo</div>}
             </div>
         </div>
@@ -29,6 +38,9 @@ function Board(){
     const [playerX, setPlayerX] = useState(true)
 
     function handleClick(i){
+        if(squares[i] || getWinner(squares)){
+            return
+        }
         let updateSquares = squares.slice();
         if(playerX){
             updateSquares[i] = 'X'
@@ -38,9 +50,11 @@ function Board(){
         setSquares(updateSquares)
         setPlayerX(!playerX)
     }
+
+    const winner = getWinner(squares);
     return(
         <>
-            <Player playState={playerX}/>
+            <Player playState={playerX} gameStats = {winner}/>
             <div className='row'>
                 <Square value={squares[0]} onSquareClick={()=>{handleClick(0)}} />
                 <Square value={squares[1]} onSquareClick={()=>{handleClick(1)}}/>
@@ -58,6 +72,26 @@ function Board(){
             </div>
         </>
     )
+}
+
+function getWinner(squares){
+    const lines = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6]
+    ]
+    for(let i = 0; i < lines.length; i++){
+        const [a, b, c] = lines[i];
+        if(squares[a] && squares[a] === squares[b] && squares[a] === squares[c]){
+            return squares[a]
+        }
+    }
+    return null
 }
 
 export default Board;

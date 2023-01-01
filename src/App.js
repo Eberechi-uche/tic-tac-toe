@@ -17,7 +17,10 @@ function App() {
       <section className='section-1'>
         <Board />
       </section>
-
+      <footer>
+      <a href="https://www.flaticon.com/free-animated-icons/happy" title="happy animated icons">Happy animated icons created by Freepik - Flaticon</a>
+      <a href="https://www.flaticon.com/free-animated-icons/emoticon" title="emoticon animated icons">Emoticon animated icons created by Freepik - Flaticon</a>
+      </footer>
     </div>
   );
 }
