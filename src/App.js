@@ -14,7 +14,7 @@ function App() {
       <header className="App-header">
         <h1>tic-tac-toe</h1>
       </header>
-      <section>
+      <section className='section-1'>
         <Board />
       </section>
 

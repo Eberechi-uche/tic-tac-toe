@@ -1,6 +1,5 @@
 .App {
   text-align: center;
-  background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -8,17 +7,54 @@
 
 
 
-.App-header {
+/* .App-header {
  
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+} */
+.section-1{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 100px;
+}
+.row{
+  display: flex;
+  text-align: center;
 }
 
-button{
+.btn{
   width: 100px;
   height: 100px;
+  border: 2px solid brown;
+  display: grid;
+  place-content: center;
   font-size: xx-large;
+  font-weight: 900;
+
+}
+
+.players{
+  display:flex;
+  justify-content:space-between;
+  align-items: center;
+  /* border:2px solid black; */
+  margin: 20px;
+  width: 80vw;
+  height: auto;
+}
+.player{
+  transition: all 0.5s;
+  border-radius: 10px;
+  padding: 10px;
+}
+.go{
+  border: 2px solid green;
+  transform: scale(1.5);
+}
+.wait{
+  border: 2px solid red;
 }
 
