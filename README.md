@@ -9,3 +9,4 @@ such as being being able to track previous state values; giving us the ability t
 conditional rendering,
 how to properly structure a react app.
 got to Appreciate react; how it makes rending ui seamless, given a state.
+project link: https://tic-taac-tooe.netlify.app
