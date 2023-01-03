@@ -1,6 +1,8 @@
 import { useState } from "react";
 import happy from '../icons/happy.gif'
 import sad from '../icons/neutral.gif'
+import ai from '../components/images/ai.png'
+import human from '../components/images/man.png'
 
 
 function Square({value, onSquareClick}){
@@ -12,41 +14,82 @@ function Square({value, onSquareClick}){
     )
 }
 
-function Player({playState, gameStats}){
+function PlayerSelector({selectMode}){
+    return(
+        
+        <div className="popUp">
+                <p>
+                    select game mode, 
+                </p>
+            <div className="playerBoard">
+               
+                <div onClick={()=>{selectMode(1)}}><img src={ai} alt="an icon of a robot"/></div>
+                <div onClick={()=>{selectMode(2)}}><img src={human} alt="an icon of two humans" /></div>
+            </div>
+            
+        </div>
+        
+    )
+}
+
+function Player({playState, gameStats, players}){
+    let tag = players === 1 ? "COM" : "PLAYER X"
     return(
         <div>
             
             
             <div className="players">
                   
-                {playState ? <div className="player go">playerX</div>:<div className="player wait">playerX</div> }
+                {playState ? <div className="player go">{tag}</div>:<div className="player wait">{tag}</div> }
                 <div className="playerBoard">
                     {gameStats && <img src={gameStats === 'X'? happy: sad } width="50" height="50" alt="sad or happy face" />}
                     {gameStats && <img src={gameStats !== 'X'? happy: sad} width="50" height="50" alt="sad or happy face"/>}
                     
                 </div>
-                {!playState ? <div className="player go ">playerO</div> : <div className="player wait">playerO</div>}
+                {!playState ? <div className="player go ">PLAYER O</div> : <div className="player wait">playerO</div>}
             </div>
         </div>
 
     )
 }
 
+function autoPlay(array){
+    for(let i = Math.floor(Math.random() * 8); i < array.length; i++){
+        if(!array[i]){
+            array[i] = 'X';
+            return
+        }
+    }
+}
+
 
 function Board(){
     const[squares, setSquares] = useState(Array(9).fill(null))
-    const [playerX, setPlayerX] = useState(true)
+    const [playerX, setPlayerX] = useState(true);
+    const [players, setPlayers] = useState(0)
+
+    function handleModeselect(i){
+        setPlayers(i)
+    }
 
     function handleClick(i){
         if(squares[i] || getWinner(squares)){
             return
         }
         let updateSquares = squares.slice();
-        if(playerX){
-            updateSquares[i] = 'X'
+        if(players !== 1){
+            if(playerX){
+                updateSquares[i] = 'X'
+            }else{
+                updateSquares[i] = 'O'
+            }
+
         }else{
-            updateSquares[i] = 'O'
+            updateSquares[i] = "O"
+            autoPlay(updateSquares)
         }
+        
+        
         setSquares(updateSquares)
         setPlayerX(!playerX)
     }
@@ -54,7 +97,8 @@ function Board(){
     const winner = getWinner(squares);
     return(
         <>
-            <Player playState={playerX} gameStats = {winner}/>
+             {players === 0 ? <PlayerSelector selectMode={handleModeselect}/> : <h2>game mode players {players}</h2>}
+            <Player playState={playerX} gameStats = {winner} players={players}/>
             <div className='row'>
                 <Square value={squares[0]} onSquareClick={()=>{handleClick(0)}} />
                 <Square value={squares[1]} onSquareClick={()=>{handleClick(1)}}/>
