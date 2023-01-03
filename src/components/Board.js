@@ -34,19 +34,20 @@ function PlayerSelector({selectMode}){
 
 function Player({playState, gameStats, players}){
     let tag = players === 1 ? "COM" : "PLAYER X"
+    let sadIcon = gameStats && <img src={sad} width="50" height="50" alt="sad or happy face" />
+    let happyIcon = gameStats && <img src={happy} width="50" height="50" alt="sad or happy face" />
+    
     return(
         <div>
             
             
             <div className="players">
                   
-                {playState ? <div className="player go">{tag}</div>:<div className="player wait">{tag}</div> }
+                {playState ? <div className="player go">{tag} {gameStats === 'X'? happyIcon : sadIcon}</div>:<div className="player wait">{tag}{gameStats === 'X'? happyIcon : sadIcon}</div> }
                 <div className="playerBoard">
-                    {gameStats && <img src={gameStats === 'X'? happy: sad } width="50" height="50" alt="sad or happy face" />}
-                    {gameStats && <img src={gameStats !== 'X'? happy: sad} width="50" height="50" alt="sad or happy face"/>}
                     
                 </div>
-                {!playState ? <div className="player go ">PLAYER O</div> : <div className="player wait">playerO</div>}
+                {!playState ? <div className="player go ">PLAYER O {gameStats === 'O'? happyIcon : sadIcon}</div> : <div className="player wait">playerO{gameStats === 'O'? happyIcon : sadIcon}</div>}
             </div>
         </div>
 

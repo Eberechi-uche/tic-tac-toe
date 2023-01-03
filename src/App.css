@@ -31,7 +31,7 @@
   padding: 50px;
   align-items: center;
   justify-content: center;
-  width: 70vw;
+  width: auto;
   height: 50vh;
   position: absolute;
   color: azure;
@@ -55,11 +55,10 @@
 }
 
 .players{
-  display:flex;
-  justify-content:space-between;
-  align-items: center;
+  display:grid;
+  place-content: center;
   /* border:2px solid black; */
-  margin: 20px;
+  /* margin: 10px; */
   width: 70vw;
   height: auto;
 }
