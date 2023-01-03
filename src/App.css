@@ -38,6 +38,7 @@
   background-color: black;
   border-radius: 20px;
   text-align: center;
+  z-index: 2;
 }
 
 .btn{
